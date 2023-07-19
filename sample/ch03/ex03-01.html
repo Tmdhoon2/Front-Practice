@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<title>쇼핑목록</title>
-<link rel="shortcut icon" href="../../img/favicon.ico">
-<!-- <script src="../../js/mylib.js"></script> -->
-<!-- <script src="../../js/prototype.js"></script> -->
-<script>
-	
-</script>
+    <meta charset="UTF-8">
+    <title>쇼핑목록</title>
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <!-- <script src="../../js/mylib.js"></script> -->
+    <!-- <script src="../../js/prototype.js"></script> -->
+    <script>
+        //window.onload = function(){}
+        window.addEventListener('DOMContentLoaded', function () {
+            var btn1 = document.querySelector('button')
+            var btn2 = btn1.nextElementSibling
+            var btn3 = btn2.nextElementSibling
+
+            // DOM Level 0 방식(비표준)
+            btn1.onclick = function () {
+                var movies = document.querySelector('#movies')
+                var firstLi = movies.firstElementChild
+                if (firstLi) {
+                    var secondLi = firstLi.nextElementSibling
+                    if (secondLi) {
+                        var title = secondLi.firstChild.nodeValue
+                        console.log(title)
+                    }
+                }
+            }
+
+            // DOM Level 0 방식(비표준)
+            btn2.onclick = function () {
+                var newLi = document.createElement('li')
+                var newTxt = document.createTextNode('우유')
+                newLi.appendChild(newTxt)
+                var purchases = document.querySelector('#purchases')
+                purchases.append(newLi)
+                console.log(newLi)
+            }
+
+            // DOM Level 2 방식(표준)
+            btn3.addEventListener('click', function () {
+                var list = document.querySelectorAll('.list')
+                for (var i = 0; i < list.length; i++) {
+                    var firstLi = list[i].firstElementChild
+                    if (firstLi) {
+                        firstLi.remove()
+                    }
+                }
+            })
+        })
+    </script>
 </head>
+
 <body>
-	<h1>쇼핑 목록(DOM 표준 API 이용)</h1>
-	<button>두번째 영화 찾기</button>
-	<button>마지막에 우유 추가</button>
-	<button>첫번째 삭제</button>
-	
-	<p title="mart">마트에서 사야할 목록</p>
-	<ul id="purchases" class="list">
-		<li>두부</li>
-		<li>계란</li>
-		<li>라면</li>
-	</ul>
-	<p>보고싶은 영화 목록</p>
-	<ul id="movies" class="list">
-		<li>어벤져스</li>
-		<li>다크나이트</li>
-		<li>미션임파서블</li>
-	</ul>
+    <h1>쇼핑 목록(DOM 표준 API 이용)</h1>
+    <button>두번째 영화 찾기</button>
+    <button>마지막에 우유 추가</button>
+    <button>첫번째 삭제</button>
+
+    <p title="mart">마트에서 사야할 목록</p>
+    <ul id="purchases" class="list">
+        <li>두부</li>
+        <li>계란</li>
+        <li>라면</li>
+    </ul>
+    <p>보고싶은 영화 목록</p>
+    <ul id="movies" class="list">
+        <li>어벤져스</li>
+        <li>다크나이트</li>
+        <li>미션임파서블</li>
+    </ul>
 </body>
+
 </html>
