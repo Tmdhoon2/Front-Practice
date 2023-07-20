@@ -6,83 +6,26 @@ var url = require('url');
 var home = path.join(__dirname, '..');
 var file = new nodeStatic.Server(home);
 http.createServer(function (req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // https://dsmhs.djsch.kr/boardCnts/view.do?m=0201&boardId=54793
+    // https://localhost/time?name=hong&age=30
+    var parseUrl = url.parse(req.url, true)
+    switch(parseUrl.pathname){
+        case '/time':
+            responseTime()
+            break
+        case '/timejson':
+            responseTimeJson()
+            break
+        default:
+            file.serve(req, res)
+    }
+
+  //res.setHeader('Access-Control-Allow-Origin', '*');
 	file.serve(req, res);
 }).listen(80, function(){
 	console.log('http://localhost');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // 서버의 현재 시간을 응답
@@ -91,7 +34,7 @@ function responseTime(req, res){
     var now = Date();
     res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
     // 추출한 query string과 함께 현재 시간을 문자열로 응답
-    res.end(query.msg + ' ' + now); 
+    res.end(query.msg + ' ' + now);
   });
 }
 
