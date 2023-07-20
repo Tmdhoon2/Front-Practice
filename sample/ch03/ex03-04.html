@@ -6,7 +6,31 @@
 <link rel="shortcut icon" href="../../img/favicon.ico">
 <script src="../../js/prototype.js"></script>
 <script>
-	
+	// window.$ = window.document.getElementById
+    // window.$$ = window.document.getElementsByTagName
+    window.onlaod = function(){
+        document.getElementsByTagName()
+        $$('button')[0].on('click', function(){
+            // new Ajax.Request('/time', {
+            //     method: 'get', // default post
+            //     aysnchronous: false, // default true == async
+            //     parameters: 'msg=Request',
+            //     onSuccess: function(xhr){
+            //         var result = xhr.responseText
+            //         $('result').innerHTML = result
+            //     }
+            // })
+
+            // new Ajax.Updater('result', '/time', {
+            //     parmeters: 'msg=Updater'
+            // })
+
+            new Ajax.PeriodicalUpdater('result', '/time', {
+                parameters: 'msg=PU',
+                frequency: 10
+            })
+        })
+    }
 </script>
 </head>
 <body>

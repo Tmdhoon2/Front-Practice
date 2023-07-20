@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<title>Javascript Lab</title>
-<link rel="shortcut icon" href="../../img/favicon.ico">
-<script src="../../js/mylib.js"></script>
-<script src="../../js/jquery-1.12.4.js"></script>
-<script>
-	
-	
-	function append(str){
-		document.querySelector('#result').innerHTML += str + '<br>';
-	}
-	
-	function appendJson(obj){
-		document.querySelector('#result').innerHTML += obj.msg + ' ' + obj.time + '<br>';
-	}
-</script>
+    <meta charset="utf-8">
+    <title>Javascript Lab</title>
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <sciprt src="../js/mylib.js"></sciprt>
+    <script src="../js/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            $('button').on('click', function () {
+                $.ajax('/time', {
+                    data: 'msg=ajax-1',
+                    success: append
+                })
+                $.ajax('/timejson', {
+                    data: 'msg=ajax-2',
+                    success: appendJson,
+                    method: 'POST',
+                    async: false,
+                    dataType: 'json'
+                })
+                $.ajax('/time?msg=ajax-3')
+                $.ajax('/time?msg=ajax-4', {
+                    success: append
+                })
+
+                $.get('/time', 'msg=get-1', append)
+                $.get('/time', 'msg=get-2')
+                $.get('/time?msg=get-3')
+                $.get('/time?msg=get-4', append)
+
+                $.getJSON('/timejson', "msg=getjson", appendJson)
+
+                $.post('/time', 'msg=post', append)
+            })
+        })
+
+        function append(str) {
+            document.querySelector('#result').innerHTML += str + '<br>';
+        }
+
+        function appendJson(obj) {
+            document.querySelector('#result').innerHTML += obj.msg + ' ' + obj.time + '<br>';
+        }
+    </script>
 </head>
+
 <body>
-	<h1>Ajax 통신(jQuery 사용)</h1>
-	<input type="text">
-	<button>서버시간요청</button>
-	<div id="result"></div>
+    <h1>Ajax 통신(jQuery 사용)</h1>
+    <input type="text">
+    <button>서버시간요청</button>
+    <div id="result"></div>
 </body>
+
 </html>
