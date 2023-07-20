@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(()=>{
+            $('button').on('click', ()=>{
+                let nickname = $('#nickname').val()
+                window.location.href = 'chat.html?nickname=' + nickname
+            })
+        })
+    </script>
+</head>
+<body>
+    <h1>채팅방 입장</h1>
+    닉네임: <input type="text" id="nickname" autofocus>
+    <button>입장</button>
+</body>
+</html>

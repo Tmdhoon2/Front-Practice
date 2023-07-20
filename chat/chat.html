@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅</title>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script>
+        $(() => {
+            var nickname = location.search.split('=')[1]
+            socket.emit('login', nickname)
+            $('button').on('click', () => {
+                var msg = $('textarea').val()
+                socket.emit('caht', msg)
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h1>채팅 화면</h1>
+    <textarea rows="20" cols="80"></textarea></br>
+    <input type="text">
+    <button>전송</button>
+</body>
+
+</html>

@@ -62,3 +62,20 @@ function getQuery(req, cb){
 		body(req, cb);
 	}
 }
+
+// socket.io 서버 구동
+var io = require('socket.io')(server)
+
+io.on('connection', socket => {
+    socket.on('disconnect', () => {
+        io.emit('toclient', `시스템: ${socket.nickname}님이 퇴장했습니다.`)
+    })
+    socket.on('login', () => {
+        socket.nickname = nickname
+        io.emit('toclient', `시스템: ${nickname}님이 입장했습니다.`)
+    })
+    socket.on('chat', msg => {
+
+        io.emit('toclient', `${socket.nickname}: ${msg}`)
+    })
+})
