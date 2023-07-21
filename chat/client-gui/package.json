@@ -1,0 +1,14 @@
+{
+  "name": "chatting",
+  "version": "1.0.0",
+  "description": "채팅 예제",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "대덕 소프트웨어 마이스터 고등학교",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^25.3.1"
+  }
+}

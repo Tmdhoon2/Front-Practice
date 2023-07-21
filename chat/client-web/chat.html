@@ -12,16 +12,25 @@
       var nickname = location.search.split('=')[1];
       socket.emit('login', decodeURI(nickname));
 
-      $('button').on('click', ()=>{
-        var msg = $('input').val();
-        socket.emit('chat', msg);
-      });
-
       var msgOut = $('textarea');
       socket.on('toclient', msg => {
         msgOut.val(msgOut.val() + msg + '\n');
         msgOut[0].scrollTop = msgOut[0].scrollHeight;
       });
+
+      $('button').on('click', send).prev().on('keydown', event => {
+        if(event.keyCode == 13){
+          send();
+        }
+      });
+
+      // 서버로 채팅 메세지 전송
+      function send(){
+        var msg = $('input').val();
+        socket.emit('chat', msg);
+        $('input').val('');
+        $('input').focus();
+      }
     });
   </script>
 </head>
